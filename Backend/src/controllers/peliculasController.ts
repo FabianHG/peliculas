@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { dao } from '../dao/peliculaDao';
+import { dao } from '../dao/peliculasDao';
 
 class PeliculasController {
     public async lista(req: Request, res: Response) {

@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const peliculasController_1 = require("../controllers/peliculasController");
-class MascotasRoutes {
+class PeliculasRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
     config() {
-        this.router.get('/', /*[checkJwt],*/ mascotasController_1.mascotaController.lista);
+        this.router.get('/', /*[checkJwt],*/ peliculasController_1.peliculaController.lista);
     }
 }
-const mascotaRoutes = new MascotasRoutes();
-exports.default = mascotaRoutes.router;
+const peliculaRoutes = new PeliculasRoutes();
+exports.default = peliculaRoutes.router;
