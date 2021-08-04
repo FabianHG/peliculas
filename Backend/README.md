@@ -1,2 +1,2 @@
-# peliculas
-Repositorio de proyecto de desarrollo web U3 R1
+# Peliculas-backend
+Bakend para aplicación elaborada mediante NodeJS para backend y Angular para FrontEnd

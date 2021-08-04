@@ -11,7 +11,7 @@ class GeneralRoutes {
 
     config(): void {
         // Obtiene los roles activo en el sistema
-        this.router.get('/rol', generalController.roles);
+        this.router.get('/razas', generalController.razas);
     }
 
 }

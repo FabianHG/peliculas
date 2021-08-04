@@ -1,22 +1,8 @@
 import { Request, Response } from 'express';
-import { dao } from '../dao/usuarioDAO';
+import { dao } from '../dao/usuarioDao';
 import { utils } from '../utils/utils';
 
 class UsuarioController {
-    /**
-     *  Nombre: lista
-     *  Descripcion: lista de usuarios de la base de datos
-     *  Resultado: json con informacion de  usuarios registrados.
-     */
-    public async lista(req: Request, res: Response) {
-        try {
-            const result = await dao.lista();
-            res.json(result);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
     /**
      *  Nombre: insert
      *  Descripcion: insertar datos de un nuevo usuario
@@ -24,10 +10,10 @@ class UsuarioController {
      */
     public async insert(req: Request, res: Response) {
         try {
-            const { username, password, cveRol, nombre, apellidos } = req.body;
+            const { username, password, nombre, apellidos } = req.body;
 
             // Verificar parametros
-            if (username == null || password == null || cveRol == null) {
+            if (username == null || password == null) {
                 return res.status(409).json({ message: "Los campos son requeridos" });
             }
 
@@ -42,12 +28,6 @@ class UsuarioController {
                 return res.status(500).json({message : "El usuario ya existe"});
             }
 
-            // Verificar Rol
-            const verifyRol = await dao.verificarRol(cveRol);
-            if(verifyRol.length <= 0) {
-                return res.status(500).json({message : "El rol no existe o no esta disponible"});
-            }
-
             // Encriptar contraseña
             const encryptedPassword = await utils.hashPassword(password);
 
@@ -56,8 +36,7 @@ class UsuarioController {
                 nombre,
                 apellidos,
                 username,
-                password: encryptedPassword,
-                cveRol
+                password: encryptedPassword
             }
 
             // Insercion de datos

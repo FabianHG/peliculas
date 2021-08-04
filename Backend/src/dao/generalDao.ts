@@ -2,9 +2,9 @@ import pool from "../database/database";
 
 class GeneralDao {
 
-    public async roles() {
+    public async razas() {
         const result = await pool.then(async (connection) => {
-            return await connection.query("SELECT r.cveRol, r.descripcion FROM rol r WHERE r.activo = ? ORDER BY r.descripcion ASC", [true])
+            return await connection.query("SELECT idRaza, nomRaza, descripcion FROM razas ORDER BY descripcion ASC")
         });
 
         return result;
