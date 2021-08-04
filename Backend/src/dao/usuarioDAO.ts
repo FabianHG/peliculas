@@ -3,7 +3,7 @@ import pool from "../database/database";
 class UsuarioDAO {
     public async lista() {
         const result  = await pool.then(async (connection) => {
-            return await connection.query("SELECT u.cveUsuario, u.nombre, u.apellidos, u.username, u.fechaRegistro, u.cveRol, r.clave as rol FROM usuario u JOIN rol r ON r.cveRol = u.cveRol ORDER BY u.nombre, u.apellidos ASC");
+            return await connection.query("SELECT u.cveUsuario, u.nombre, u.apellidos, u.username, u.fechaRegistro, u.cveRol, r.descripcion as rol FROM usuario u JOIN rol r ON r.cveRol = u.cveRol ORDER BY u.nombre, u.apellidos ASC");
         });
 
         return result;
@@ -11,7 +11,7 @@ class UsuarioDAO {
 
     public async verificarUsuario(usuario: string) {
         const result = await pool.then(async (connection) => {
-            return await connection.query('SELECT cveUsuario FROM usuario WHERE usuario = ?', [usuario]);
+            return await connection.query('SELECT cveUsuario FROM usuario WHERE username = ?', [usuario]);
         });
 
         return result;
@@ -29,8 +29,8 @@ class UsuarioDAO {
         const result = await pool.then(async (connection) => {
             return await connection.query("INSERT INTO usuario SET ?", [user]);
         });
-
         return result;
+        
     }
 }
 

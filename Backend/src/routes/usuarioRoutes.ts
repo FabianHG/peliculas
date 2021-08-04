@@ -11,8 +11,8 @@ class UsuarioRoutes {
     }
 
     config(): void {
-        this.router.get('/', /*[checkJwt, checkRol([1, 2])],*/ usuarioController.lista);
-        this.router.put('/', /*[checkJwt, checkRol([1])], */ usuarioController.insert);
+        this.router.get('/', [checkJwt, checkRol([1])], usuarioController.lista);
+        this.router.put('/', [checkJwt, checkRol([1])], usuarioController.insert);
     }
 }
 

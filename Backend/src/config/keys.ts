@@ -4,6 +4,6 @@ export default{
         port: 3306,
         user: 'root',
         password: '',
-        database: 'peliculas'
+        database: 'db_desarrollo_integral'
     }
 }
