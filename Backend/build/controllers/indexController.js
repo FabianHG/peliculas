@@ -9,19 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.peliculaController = void 0;
-const peliculasDao_1 = require("../dao/peliculasDao");
-class PeliculasController {
+exports.indexController = void 0;
+class IndexController {
     lista(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const result = yield peliculasDao_1.dao.lista();
-                res.json(result);
-            }
-            catch (error) {
-                res.status(500).json({ message: error.message });
-            }
+            // const result = await dao.test();
+            // res.json(result);
+            res.json({ message: "API WORKS" });
         });
     }
+    insertar(req, res) {
+        res.json({ message: "INSERT DATA" });
+    }
+    actualizar(req, res) {
+        res.json({ message: "UPDATE DATA" });
+    }
+    eliminar(req, res) {
+        res.json({ message: "DELETE DATA" });
+    }
 }
-exports.peliculaController = new PeliculasController();
+exports.indexController = new IndexController();

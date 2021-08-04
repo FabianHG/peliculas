@@ -30,7 +30,7 @@ class Server {
     routes() {
         this.app.use('/usuario', usuarioRoutes_1.default);
         this.app.use('/auth', authRoutes_1.default);
-        this.app.use('/pelcula', peliculasRoutes_1.default);
+        this.app.use('/pelicula', peliculasRoutes_1.default);
         this.app.use('/general', generalRoutes_1.default);
     }
     // Inicialización del servidor

@@ -9,19 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.peliculaController = void 0;
-const peliculasDao_1 = require("../dao/peliculasDao");
-class PeliculasController {
-    lista(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const result = yield peliculasDao_1.dao.lista();
-                res.json(result);
+exports.checkRol = void 0;
+const authDao_1 = require("../dao/authDao");
+const checkRol = (roles) => {
+    return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { cveUsuario } = res.locals.jwtPayLoad;
+            const lstUsers = yield authDao_1.dao.getUserById(cveUsuario);
+            for (let user of lstUsers) {
+                if (roles.includes(user.cveRol)) {
+                    next();
+                }
+                else {
+                    res.status(404).json({ message: "No autorizado" });
+                }
             }
-            catch (error) {
-                res.status(500).json({ message: error.message });
-            }
-        });
-    }
-}
-exports.peliculaController = new PeliculasController();
+        }
+        catch (error) {
+            res.status(404).json({ message: "No autorizado" });
+        }
+    });
+};
+exports.checkRol = checkRol;

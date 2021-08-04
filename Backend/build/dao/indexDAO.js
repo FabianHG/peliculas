@@ -8,20 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.peliculaController = void 0;
-const peliculasDao_1 = require("../dao/peliculasDao");
-class PeliculasController {
-    lista(req, res) {
+exports.dao = void 0;
+const database_1 = __importDefault(require("../database/database"));
+class IndexDAO {
+    test() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const result = yield peliculasDao_1.dao.lista();
-                res.json(result);
-            }
-            catch (error) {
-                res.status(500).json({ message: error.message });
-            }
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query("SELECT * FROM rol");
+            }));
+            return result;
         });
     }
 }
-exports.peliculaController = new PeliculasController();
+exports.dao = new IndexDAO();
