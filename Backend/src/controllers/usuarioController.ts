@@ -39,7 +39,7 @@ class UsuarioController {
             const result = await dao.insert(user);
 
             if (result.affectedRows > 0) {
-                return res.json({ message: "Datos guardados exitosamente" });
+                return res.json({ message: "Los datos han sido guardados" });
             } else {
                 return res.status(409).json({ message: result.message });
             }
