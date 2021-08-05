@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
   </ng-container>
-    <span>Sistema de ventas</span>
+    <span>Peliculas</span>
     <span class="spacer"></span>
     <!-- Con routerLink nosotros le indicamos a donde queremos que se dirija al presionar el boton -->
     <a *ngIf="!isLogged; else viewLogout" mat-button routerLink="/login">Iniciar sesión</a>
@@ -19,7 +19,7 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <mat-icon>badge</mat-icon>
-      <span>Mi Perfil</span>
+      <span>Perfil</span>
     </button>
     <button mat-menu-item (click)="onLogout()">
       <mat-icon>logout</mat-icon>
