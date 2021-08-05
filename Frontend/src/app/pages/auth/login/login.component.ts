@@ -16,12 +16,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   private destroy= new Subject<any>();
   loginForm = this.fb.group({
     username: ['', [
-      Validators.email,
       Validators.required,
     ]],
     password: ['', [
       Validators.required,
-      Validators.minLength(4)
+      Validators.minLength(8)
     ]]
   });
 
@@ -58,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       } else if(campo.errors?.email){
         message = "El formato no es correcto";
       } else if(campo.errors?.minlength){
-        message = "Los caracteres minimos son 4";
+        message = "Los caracteres minimos son 8";
       }
     }
     return message;
