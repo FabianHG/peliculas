@@ -21,6 +21,27 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
         this.lstMenu = [];
+        if(user){
+          if (user) {
+            this.lstMenu = [
+              {
+                nombre: 'Usuarios',
+                icono: 'people',
+                ruta: '/admin/users'
+              },
+              {
+                nombre: 'Categorias',
+                icono: 'category',
+                ruta: '/admin/categories'
+              },
+              {
+                nombre: 'Reportes',
+                icono: 'assessment',
+                ruta: '/admin/reports'
+              }
+            ];
+          } 
+        }
         
       });
   }
