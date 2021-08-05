@@ -1,25 +1,25 @@
 import pool from "../database/database";
 
-class PeliculaDAO {
+class UsuarioDAO {
     public async lista() {
         const result  = await pool.then(async (connection) => {
-            return await connection.query("SELECT cvePelicula, titulo, anio, critica, cveAutor FROM pelicula order by cvePelicula ASC");
+            return await connection.query("SELECT cvePelicula,titulo,anio,critica,cveUsuario FROM pelicula ORDER BY cvePelicula ASC");
         });
 
         return result;
     }
 
-    public async verificarUsuario(pelicula: string) {
+    public async verificartitulo(titulo: string) {
         const result = await pool.then(async (connection) => {
-            return await connection.query('SELECT cvePelicula FROM pelicula WHERE username = ?', [pelicula]);
+            return await connection.query('SELECT cvePelicula FROM pelicula WHERE titulo = ?', [titulo]);
         });
 
         return result;
     }
 
-    public async verificarRol(cveRol: number) {
+    public async verificarAño(Año: number) {
         const result = await pool.then(async (connection) => {
-            return await connection.query('SELECT * FROM rol WHERE cveRol = ? AND activo = ?', [cveRol, true]);
+            return await connection.query('SELECT * FROM pelicula WHERE Año = ? AND activo = ?', [Año, true]);
         });
 
         return result;
@@ -32,6 +32,24 @@ class PeliculaDAO {
         return result;
         
     }
+
+    public async update(pelicula: any) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query("UPDATE pelicula SET ? WHERE cvePelicula = ?", [pelicula, pelicula.cvePelicula]);
+        });
+
+        return result;
+
+    }
+
+    public async delete(cvePelicula: number) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query("DELETE FROM pelicula WHERE cvePelicula = ?", [cvePelicula]);
+        });
+
+        return result;
+
+    }
 }
 
-export const dao = new PeliculaDAO();
+export const dao = new UsuarioDAO();

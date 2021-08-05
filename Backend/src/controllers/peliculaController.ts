@@ -24,42 +24,37 @@ class PeliculaController {
      */
     public async insert(req: Request, res: Response) {
         try {
-            const { username, password, cveRol, nombre, apellidos, año } = req.body;
+            const { titulo,anio,critica, } = req.body;
 
             // Verificar parametros
-            if (username == null || password == null || cveRol == null || año==null) {
+            if (titulo == null || anio == null || critica == null) {
                 return res.status(409).json({ message: "Los campos son requeridos" });
             }
 
             // Verificar longitud de caracteres
-            if(username.length > 150){
-                return res.status(500).json({message : "La longitud maxima del usuario es de 150 caracteres"});
+            if(titulo.length > 150){
+                return res.status(500).json({message : "La longitud maxima del titulo es de 150 caracteres"});
             }
 
             // Verificar nombre de usuario
-            const verify = await dao.verificarUsuario(username);
+            const verify = await dao.verificartitulo(titulo);
             if(verify.length > 0){
-                return res.status(500).json({message : "El usuario ya existe"});
+                return res.status(500).json({message : "La pelicula ya existe"});
             }
 
-            // Verificar Rol
-            const verifyAño = await dao.verificarAño(año);
+            // Verificar Año
+            const verifyAño = await dao.verificarAño(anio);
             if(verifyAño.length <= 0) {
-                return res.status(500).json({message : "El rol no existe o no esta disponible"});
+                return res.status(500).json({message : "El Año no existe o no esta disponible"});
             }
 
-            // Encriptar contraseña
-            const encryptedPassword = await utils.hashPassword(password);
 
             // Llamar objetos
             const pelicula = {
-                nombre,
-                apellidos,
-                username,
-                password: encryptedPassword,
-                cveRol,
-                año
-            }
+                titulo,
+                anio,
+                critica,
+                }
 
             // Insercion de datos
             const result = await dao.insert(pelicula);
@@ -72,6 +67,47 @@ class PeliculaController {
             res.json(result);
         } catch (ex) {
             res.status(500).json({ message: ex.message });
+        }
+    }
+
+    public async update (req:  Request, res: Response){
+        try {
+            const pelicula = req.body;
+
+            if(pelicula.cvePelicula == null){
+                return res.status(400).json({ meesage : "No se puede actualizar" });
+            }
+
+            const result = await dao.update(pelicula);
+
+            if(result.affectedRows > 0){
+                return res.json({ meesage : "Actualizado correctamente" });
+            } else  {
+                return res.status(400).json({ meesage : result.message });
+            }
+
+        } catch (ex) {
+            res.status(500).json({ message: ex.message });
+        }
+    }
+
+    public async delete(req: Request, res: Response){
+        try {
+            const { cvePelicula } = req.params;
+
+            if(cvePelicula == null){
+                return res.status(400).json({ message : "No se puede eliminar" });
+            }
+
+            const result = await dao.delete(parseInt(cvePelicula));
+
+            if(result.affectedRows > 0){
+                res.json({ message : "Borrado exitosamente" })
+            } else  {
+                res.status(400).json({ message : result.message });
+            }
+        } catch (error) {
+            res.status(400).json({ message : error.message });
         }
     }
 }
