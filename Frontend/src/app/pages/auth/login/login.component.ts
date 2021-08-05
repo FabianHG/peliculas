@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     ]],
     password: ['', [
       Validators.required,
-      Validators.minLength(8)
+      Validators.minLength(4)
     ]]
   });
 
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       } else if(campo.errors?.email){
         message = "El formato no es correcto";
       } else if(campo.errors?.minlength){
-        message = "Los caracteres minimos son 8";
+        message = "Los caracteres minimos son 4";
       }
     }
     return message;

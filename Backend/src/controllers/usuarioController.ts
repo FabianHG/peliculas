@@ -29,10 +29,10 @@ class UsuarioController {
 
             // Llamar objetos
             const user = {
-                username,
-                password: encryptedPassword,
                 nombre,
-                apellidos
+                apellidos,
+                username,
+                password: encryptedPassword
             }
 
             // Insercion de datos

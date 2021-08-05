@@ -7,6 +7,7 @@ import indexRoutes from './routes/indexRoutes';
 import authRoutes from './routes/authRoutes';
 import peliculaRoutes from './routes/peliculaRoutes';
 import generalRoutes from './routes/generalRoutes';
+import usuarioRoutes from './routes/usuarioRoutes';
 
 class Server {
 
@@ -33,6 +34,7 @@ class Server {
         this.app.use('/auth', authRoutes);
         this.app.use('/pelicula', peliculaRoutes);
         this.app.use('/general', generalRoutes);
+        this.app.use('/usuario', usuarioRoutes);
     }
 
     // Inicialiazación del servidor
