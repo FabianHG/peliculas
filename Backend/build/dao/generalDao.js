@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.dao = void 0;
 const database_1 = __importDefault(require("../database/database"));
 class GeneralDao {
-    razas() {
+    roles() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query("SELECT idRaza, nomRaza, descripcion FROM razas ORDER BY descripcion ASC");
+                return yield connection.query("SELECT r.cveRol, r.descripcion FROM rol r WHERE r.activo = ? ORDER BY r.descripcion ASC", [true]);
             }));
             return result;
         });

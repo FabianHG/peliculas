@@ -16,7 +16,7 @@ const checkJwt = (req, res, next) => {
     catch (error) {
         return res.status(404).json({ message: "No autorizado" });
     }
-    const { cveUsuario, username, mascota } = jwtPayLoad;
+    const { cveUsuario, username, peliculas } = jwtPayLoad;
     const newToken = jsonwebtoken_1.default.sign({ cveUsuario, username }, jwtKey_1.default.jwtSecret, { expiresIn: '1h' });
     res.setHeader('token', newToken);
     next();

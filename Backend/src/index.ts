@@ -1,26 +1,25 @@
-import express , { Application } from 'express';
+import express, {Application} from 'express';
 import morgan from 'morgan';
-import cors from 'cors'
+import cors from 'cors';
 
 // routes
-import usuarioRoutes from './routes/usuarioRoutes';
+import indexRoutes from './routes/indexRoutes';
 import authRoutes from './routes/authRoutes';
-import peliculasRoutes from './routes/peliculasRoutes';
+import peliculaRoutes from './routes/peliculaRoutes';
 import generalRoutes from './routes/generalRoutes';
 
 class Server {
 
     public app: Application;
-
-    // Constructor de nuestro servidor
-    constructor() {
+    
+    constructor() { 
         this.app = express();
         this.config();
         this.routes();
     }
 
     // Configuración del servidor
-    config(): void {
+    config(): void { 
         this.app.set("port", process.env.PORT || 3000);
         this.app.use(morgan("dev"));
         this.app.use(cors());
@@ -28,21 +27,21 @@ class Server {
         this.app.use(express.urlencoded({extended: false}));
     }
 
-    // Rutas para mi APIRest
-    routes(): void {
-        this.app.use('/usuario', usuarioRoutes);
+    // rutas para mi APIRest
+    routes(): void { 
+        this.app.use('/', indexRoutes);
         this.app.use('/auth', authRoutes);
-        this.app.use('/pelicula', peliculasRoutes);
+        this.app.use('/pelicula', peliculaRoutes);
         this.app.use('/general', generalRoutes);
     }
 
-    // Inicialización del servidor
+    // Inicialiazación del servidor
     start(): void {
         this.app.listen(this.app.get('port'), () => {
             console.log("Server on port", this.app.get('port'));
         });
-    }
- 
+     }
+
 }
 
 const server = new Server();

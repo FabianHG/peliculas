@@ -12,10 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generalController = void 0;
 const generalDao_1 = require("../dao/generalDao");
 class GeneralController {
-    razas(req, res) {
+    roles(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield generalDao_1.dao.razas();
+                const result = yield generalDao_1.dao.roles();
                 res.json(result);
             }
             catch (error) {

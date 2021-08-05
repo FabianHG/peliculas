@@ -9,7 +9,7 @@ class GeneralRoutes {
     }
     config() {
         // Obtiene los roles activo en el sistema
-        this.router.get('/razas', generalController_1.generalController.razas);
+        this.router.get('/rol', generalController_1.generalController.roles);
     }
 }
 const generalRoutes = new GeneralRoutes();

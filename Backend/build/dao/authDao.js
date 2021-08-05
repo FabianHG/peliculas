@@ -18,7 +18,7 @@ class AuthDAO {
     getUser(usuario) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query('SELECT * FROM usuario WHERE username = ?', [usuario]);
+                return yield connection.query('SELECT * FROM usuario JOIN rol ON usuario.cveRol = rol.cveRol WHERE username = ?', [usuario]);
             }));
             return result;
         });

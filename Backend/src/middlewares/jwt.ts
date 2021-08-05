@@ -13,7 +13,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
         return res.status(404).json({message : "No autorizado"});
     }
 
-    const {cveUsuario, username, mascota} = jwtPayLoad;
+    const {cveUsuario, username, peliculas} = jwtPayLoad;
     const newToken = jwt.sign({cveUsuario, username}, secretKey.jwtSecret, {expiresIn : '1h'});
     res.setHeader('token', newToken);
     next();
