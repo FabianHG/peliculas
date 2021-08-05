@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UsersService } from '@app/pages/admin/services/users.service';
+import { PeliculaService } from '@app/pages/admin/services/users.service';
 import { Rol } from '@app/shared/models/rol.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class ModalFormularioComponent implements OnInit, OnDestroy {
     cveRol : ['', [Validators.required]]
   })
 
-  constructor(public dialogRef: MatDialogRef<ModalFormularioComponent> ,@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private UsersSvc: UsersService, private _snackBar: MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<ModalFormularioComponent> ,@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private UsersSvc: PeliculaService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getRoles();

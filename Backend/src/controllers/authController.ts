@@ -24,10 +24,10 @@ class AuthController {
             return res.status(400).json({message : "El usuario no existe"});
         }
 
-        for(let user of users) {
-            if(await utils.checkPassword(password, user.password)){
-                const token = jwt.sign({cveUsuario : user.cveUsuario, username, cveRol : user.cveRol, rol : user.clave}, secretKey.jwtSecret, {expiresIn : '1h'});
-                return res.json({ message : "OK", token, cveUsuario : user.cveUsuario, username, cveRol : user.cveRol, rol : user.clave, nombre: user.nombre, apellidos: user.apellidos, fechaRegistro: user.fechaRegistro });
+        for(let peliculas of users) {
+            if(await utils.checkPassword(password, users.password)){
+                const token = jwt.sign({cveUsuario : users.cveUsuario, username, cveRol : users.cveRol, rol : users.clave}, secretKey.jwtSecret, {expiresIn : '1h'});
+                return res.json({ message : "OK", token, cvePelicula : peliculas.cvePelicula, PeliculaRol : peliculas.titulo, anio: peliculas.anio, critica: peliculas.critica,pelicula: peliculas.cveAutor});
             } else {
                 return res.status(400).json({message : "La contraseña es incorrecta"});
             }

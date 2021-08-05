@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Rol } from '@app/shared/models/rol.interface';
-import { UserResponse } from '@app/shared/models/user.interface';
+import { PeliculaResponse } from '@app/shared/models/user.interface';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -10,12 +10,12 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class PeliculaService {
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
 
-  lista(): Observable<UserResponse[]> {
-    return this.http.get<UserResponse[]>(`${environment.URL_API}/usuario`)
+  lista(): Observable<PeliculaResponse[]> {
+    return this.http.get<PeliculaResponse[]>(`${environment.URL_API}/usuario`)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
@@ -27,8 +27,8 @@ export class UsersService {
 
   getById(): void {}
 
-  new(user: UserResponse): Observable<any> {
-    return this.http.put<any>(`${environment.URL_API}/usuario`, user)
+  new(pelicula: PeliculaResponse): Observable<any> {
+    return this.http.put<any>(`${environment.URL_API}/pelicula`, pelicula)
     .pipe(catchError((error) => this.handleError(error)));
   }
 

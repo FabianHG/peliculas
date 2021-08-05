@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User, UserResponse } from '@app/shared/models/user.interface';
+import { User, PeliculaResponse } from '@app/shared/models/user.interface';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { environment } from '@env/environment';
@@ -16,23 +16,23 @@ const helper = new JwtHelperService();
 })
 export class AuthService {
 
-  private user = new BehaviorSubject<UserResponse | null>(null);
+  private user = new BehaviorSubject<PeliculaResponse | null>(null);
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar, private router: Router, private utilsSvc: UtilsService) {
     this.checkToken();
   }
 
-  get user$(): Observable<UserResponse | null> {
+  get user$(): Observable<PeliculaResponse | null> {
     return this.user.asObservable();
   }
 
-  get userValue(): UserResponse | null {
+  get userValue(): PeliculaResponse | null {
     return this.user.getValue();
   }
 
-  logIn(authData: User): Observable<UserResponse | void> {
-    return this.http.post<UserResponse>(`${environment.URL_API}/auth`, authData).pipe(
-      map((user: UserResponse) => {
+  logIn(authData: User): Observable<PeliculaResponse | void> {
+    return this.http.post<PeliculaResponse>(`${environment.URL_API}/auth`, authData).pipe(
+      map((user: PeliculaResponse) => {
         this.saveLocalStorage(user);
         this.user.next(user);
         return user;
@@ -67,7 +67,7 @@ export class AuthService {
 
   }
 
-  private saveLocalStorage(user: UserResponse): void {
+  private saveLocalStorage(user: PeliculaResponse): void {
     const { message, ...rest } = user;
     var encrypt = crypto.AES.encrypt(JSON.stringify(rest), environment.SECRET_KEY).toString();
     localStorage.setItem("user", encrypt);

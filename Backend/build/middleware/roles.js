@@ -14,10 +14,10 @@ const authDao_1 = require("../dao/authDao");
 const checkRol = (roles) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { cveUsuario } = res.locals.jwtPayLoad;
-            const lstUsers = yield authDao_1.dao.getUserById(cveUsuario);
-            for (let user of lstUsers) {
-                if (roles.includes(user.cveRol)) {
+            const { cvePelicula } = res.locals.jwtPayLoad;
+            const lstPeliculas = yield authDao_1.dao.getUserById(cvePelicula);
+            for (let peliculas of lstPeliculas) {
+                if (roles.includes(peliculas.cveRol)) {
                     next();
                 }
                 else {

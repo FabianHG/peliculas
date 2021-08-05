@@ -1,43 +1,42 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UserResponse } from '@app/shared/models/user.interface';
+import { PeliculaResponse } from '@app/shared/models/user.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { UsersService } from '../services/users.service';
+import { PeliculaService } from '../services/users.service';
 import { ModalFormularioComponent } from './components/modal-formulario/modal-formulario.component';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  templateUrl: './peliculas.component.html',
+  styleUrls: ['./peliculas.component.scss']
 })
-export class UsersComponent implements OnInit, OnDestroy {
+export class PeliculasComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<any>();
 
   displayedColumns: string[] = [
-    'nombre',
-    'apellidos',
-    'username',
-    'fechaRegistro',
-    'rol',
+    'titulo',
+    'anio',
+    'critica',
+    'cveAutor',
     'editar',
     'eliminar'
   ];
-  lstUsers: UserResponse[] = [];
+  lstPeliculas: PeliculaResponse[] = [];
 
-  constructor(private userSvc: UsersService, private dialog: MatDialog) { }
+  constructor(private userSvc: PeliculaService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userSvc.lista()
     .pipe(takeUntil(this.destroy$))
-    .subscribe(users => this.lstUsers = users);
+    .subscribe(peliculas => this.lstPeliculas = peliculas);
   }
 
-  onOpenModal(user = {}): void {
+  onOpenModal(peliculas = {}): void {
     const dialogRef = this.dialog.open(ModalFormularioComponent, {
       disableClose: true,
-      data: {title: 'Nuevo usuario', user}
+      data: {title: 'Nuevo usuario', peliculas}
     });
   }
 

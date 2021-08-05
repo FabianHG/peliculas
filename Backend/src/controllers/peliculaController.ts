@@ -52,7 +52,7 @@ class PeliculaController {
             const encryptedPassword = await utils.hashPassword(password);
 
             // Llamar objetos
-            const user = {
+            const pelicula = {
                 nombre,
                 apellidos,
                 username,
@@ -61,7 +61,7 @@ class PeliculaController {
             }
 
             // Insercion de datos
-            const result = await dao.insert(user);
+            const result = await dao.insert(pelicula);
 
             if (result.affectedRows > 0) {
                 return res.json({ message: "Datos guardados exitosamente" });

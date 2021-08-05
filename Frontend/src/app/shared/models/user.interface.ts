@@ -3,7 +3,7 @@ export interface User {
     password: string;
 }
 
-export interface UserResponse {
+export interface PeliculaResponse {
     message: string;
     token: string;
     nombre: string;

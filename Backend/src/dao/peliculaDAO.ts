@@ -3,15 +3,15 @@ import pool from "../database/database";
 class PeliculaDAO {
     public async lista() {
         const result  = await pool.then(async (connection) => {
-            return await connection.query("SELECT u.cveUsuario, u.nombre, u.apellidos, u.username, u.fechaRegistro, u.cveRol, r.descripcion as rol FROM usuario u JOIN rol r ON r.cveRol = u.cveRol ORDER BY u.nombre, u.apellidos ASC");
+            return await connection.query("SELECT cvePelicula, titulo, anio, critica, cveAutor FROM pelicula order by cvePelicula ASC");
         });
 
         return result;
     }
 
-    public async verificarUsuario(usuario: string) {
+    public async verificarUsuario(pelicula: string) {
         const result = await pool.then(async (connection) => {
-            return await connection.query('SELECT cveUsuario FROM usuario WHERE username = ?', [usuario]);
+            return await connection.query('SELECT cvePelicula FROM pelicula WHERE username = ?', [pelicula]);
         });
 
         return result;
@@ -25,9 +25,9 @@ class PeliculaDAO {
         return result;
     }
 
-    public async insert(user: any) {
+    public async insert(pelicula: any) {
         const result = await pool.then(async (connection) => {
-            return await connection.query("INSERT INTO usuario SET ?", [user]);
+            return await connection.query("INSERT INTO pelicula SET ?", [pelicula]);
         });
         return result;
         
