@@ -24,10 +24,10 @@ class PeliculaController {
      */
     public async insert(req: Request, res: Response) {
         try {
-            const { username, password, cveRol, nombre, apellidos } = req.body;
+            const { username, password, cveRol, nombre, apellidos, año } = req.body;
 
             // Verificar parametros
-            if (username == null || password == null || cveRol == null) {
+            if (username == null || password == null || cveRol == null || año==null) {
                 return res.status(409).json({ message: "Los campos son requeridos" });
             }
 
@@ -43,8 +43,8 @@ class PeliculaController {
             }
 
             // Verificar Rol
-            const verifyRol = await dao.verificarRol(cveRol);
-            if(verifyRol.length <= 0) {
+            const verifyAño = await dao.verificarAño(año);
+            if(verifyAño.length <= 0) {
                 return res.status(500).json({message : "El rol no existe o no esta disponible"});
             }
 
@@ -57,7 +57,8 @@ class PeliculaController {
                 apellidos,
                 username,
                 password: encryptedPassword,
-                cveRol
+                cveRol,
+                año
             }
 
             // Insercion de datos
