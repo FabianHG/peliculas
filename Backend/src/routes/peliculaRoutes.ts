@@ -13,6 +13,8 @@ class PeliculaRoutes {
     config(): void {
         this.router.get('/', [checkJwt, checkRol([1])], peliculaController.lista);
         this.router.put('/', [checkJwt, checkRol([1])], peliculaController.insert);
+        this.router.post('/', [checkJwt, checkRol([1])], peliculaController.update);
+        this.router.delete('/:cvePelicula', [checkJwt, checkRol([1])], peliculaController.delete)
     }
 }
 
