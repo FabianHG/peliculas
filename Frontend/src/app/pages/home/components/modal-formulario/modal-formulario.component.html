@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>{{ data?.title }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="userForm">
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Titulo: </mat-label>
+            <input formControlName="titulo" matInput >
+            <mat-error>
+                {{ getErrorMessage('titulo') }}
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="full-width"  appearance="outline">
+            <mat-label>critica: </mat-label>
+            <input formControlName="critica" matInput >
+            <mat-error>
+                {{ getErrorMessage('critica') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Año: </mat-label>
+            <mat-select formControlName="anio">
+                <mat-option value="2021">2021</mat-option>
+                <mat-option value="2020">2020</mat-option>
+                <mat-option value="2019">2019</mat-option>
+                <mat-option value="2018">2018</mat-option>
+                <mat-option value="2017">2017</mat-option>
+            </mat-select>
+            <mat-error>
+                {{ getErrorMessage('anio') }}
+            </mat-error>
+        </mat-form-field>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+        <mat-icon>cancel</mat-icon>
+        Cancelar
+    </button>
+    <button mat-raised-button [disabled]="userForm.invalid" color="primary" (click)="onSave()">
+        <mat-icon>save</mat-icon>
+        Guardar
+    </button>
+</mat-dialog-actions>

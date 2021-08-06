@@ -1,0 +1,60 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Pelicula</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="divStyle">
+            <button type="button" mat-raised-button color="primary" style="margin: 2ch;" (click)="onOpenModal()">
+                <mat-icon>add</mat-icon>
+                <span>Agregar</span>
+            </button>
+        </div>
+
+        <table mat-table [dataSource]="lstUsers" class="mat-elevation-z8">
+          
+            <!-- Columna nombre -->
+            <ng-container matColumnDef="titulo">
+              <th mat-header-cell *matHeaderCellDef> Titulo </th>
+              <td mat-cell *matCellDef="let user"> {{user.titulo}} </td>
+            </ng-container>
+          
+            <!-- Columna Apellidos -->
+            <ng-container matColumnDef="anio">
+              <th mat-header-cell *matHeaderCellDef> Año </th>
+              <td mat-cell *matCellDef="let user"> {{user.anio}} </td>
+            </ng-container>
+          
+            <!-- Columna nombre de usuario -->
+            <ng-container matColumnDef="critica">
+              <th mat-header-cell *matHeaderCellDef> critica </th>
+              <td mat-cell *matCellDef="let user"> {{user.critica}} </td>
+            </ng-container>
+          
+
+
+            <!-- Columna Editar -->
+            <ng-container matColumnDef="editar">
+              <th mat-header-cell *matHeaderCellDef> Editar </th>
+              <td mat-cell *matCellDef="let user">
+                <button type="button" mat-icon-button color="primary" (click)="onOpenModal(user)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Columna Eliminar -->
+            <ng-container matColumnDef="eliminar">
+              <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+              <td mat-cell *matCellDef="let user">
+                <button mat-icon-button color="warn" (click)="onDelete(user.cvePelicula)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+    </mat-card-content>
+</mat-card>
