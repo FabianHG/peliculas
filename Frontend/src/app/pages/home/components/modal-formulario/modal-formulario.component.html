@@ -4,7 +4,7 @@
 
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Titulo: </mat-label>
-            <input formControlName="titulo" matInput maxlength="250" >
+            <input formControlName="titulo" matInput >
             <mat-error>
                 {{ getErrorMessage('titulo') }}
             </mat-error>
@@ -13,11 +13,10 @@
 
         <mat-form-field class="full-width"  appearance="outline">
             <mat-label>critica: </mat-label>
-            <textarea  formControlName="critica" matInput maxlength="500">
+            <input formControlName="critica" matInput >
             <mat-error>
                 {{ getErrorMessage('critica') }}
             </mat-error>
-            </textarea>
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline">

@@ -25,14 +25,20 @@ export class UsersService {
       this.handleError(error)));
   }
 
-  getById(): void {}
-
   new(user: UserResponse): Observable<any> {
     return this.http.put<any>(`${environment.URL_API}/usuario`, user)
     .pipe(catchError((error) => this.handleError(error)));
   }
 
-  update(): void {}
+  update(user: UserResponse): Observable<any> {
+    return this.http.post<any>(`${environment.URL_API}/usuario`, user)
+    .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  delete(cvePelicula: number): Observable<any> {
+    return this.http.delete<any>(`${environment.URL_API}/usuario/${cvePelicula}`)
+    .pipe(catchError((error) => this.handleError(error)));
+  }
 
   private handleError(err: any): Observable<never> {
     let errorMessage = "Ocurrio un error";

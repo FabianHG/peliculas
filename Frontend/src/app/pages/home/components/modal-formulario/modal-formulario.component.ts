@@ -71,16 +71,7 @@ export class ModalFormularioComponent implements OnInit, OnDestroy {
         this.dialogRef.close(true);  
       });
     } else {
-      // Update
-      const { password, ...rest } = formValue;
-      this.UsersSvc.update(rest)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(result => {
-        this._snackBar.open(result.message, '', {
-          duration: 6000
-        });
-        this.dialogRef.close(true);  
-      });
+
     }
   }
 

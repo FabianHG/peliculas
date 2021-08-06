@@ -4,11 +4,11 @@ import { dao } from '../dao/authDao';
 export const checkRol = (roles: Array<Number>) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { cvePelicula } = res.locals.jwtPayLoad;
+            const { cveUsuario } = res.locals.jwtPayLoad;
 
-            const lstPeliculas = await dao.getUserById(cvePelicula);
-            for (let peliculas of lstPeliculas) {
-                if(roles.includes(peliculas.cveRol)){
+            const lstUsers = await dao.getUserById(cveUsuario);
+            for (let user of lstUsers) {
+                if(roles.includes(user.cveRol)){
                     next();
                 } else {
                     res.status(404).json({ message: "No autorizado" });

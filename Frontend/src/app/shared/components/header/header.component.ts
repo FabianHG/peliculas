@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy = new Subject<any>();
+  rol = "";
   isLogged = false;
   username = ""; 
   @Output() toggleSidenav = new EventEmitter<void>();
@@ -24,9 +25,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(user => {
         if (user) {
           this.isLogged = true;
+          this.rol = user.rol;
           this.username = user.username;
         } else {
           this.isLogged = false;
+          this.rol = "";
           this.username = "";
         }
       });

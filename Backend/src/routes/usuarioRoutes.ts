@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {usuarioController} from '../controllers/usuarioController';
 import { checkJwt } from '../middleware/jwt';
-
+import { checkRol } from '../middleware/roles';
 
 class UsuarioRoutes {
     public router: Router = Router();
@@ -11,10 +11,9 @@ class UsuarioRoutes {
     }
 
     config(): void {
-        this.router.put('/', usuarioController.insert);
-        this.router.get('/', [checkJwt ], usuarioController.lista);
-        this.router.put('/', [checkJwt], usuarioController.insertp);
-        this.router.post('/', [checkJwt], usuarioController.update);
+        this.router.get('/', [checkJwt, checkRol([1])], usuarioController.lista);
+        this.router.put('/', [checkJwt, checkRol([1])], usuarioController.insert);
+        this.router.post('/', [checkJwt, checkRol([1])], usuarioController.update);
         this.router.delete('/:cvePelicula', [checkJwt],  usuarioController.delete);
     }
 }

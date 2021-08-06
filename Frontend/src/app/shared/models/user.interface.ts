@@ -10,4 +10,7 @@ export interface UserResponse {
     apellidos: string;
     cveUsuario: string;
     username: string;
+    cveRol: number;
+    rol: string;
+    fechaRegistro: Date;
 }

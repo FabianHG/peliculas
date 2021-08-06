@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <ng-container>
+  <ng-container *ngIf="rol != '' ">
     <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -19,7 +19,7 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <mat-icon>badge</mat-icon>
-      <span>Perfil</span>
+      <span>Mi Perfil</span>
     </button>
     <button mat-menu-item (click)="onLogout()">
       <mat-icon>logout</mat-icon>
